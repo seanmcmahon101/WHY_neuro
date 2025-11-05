@@ -120,7 +120,8 @@ if readytorun
 
         correct_asc_filename = ETFILES(s).name; %fcked past this point
         full_asc_filepath = [ETPATH, correct_asc_filename];
-        output_mat_filepath = [ETPATH, correct_asc_filename(1:end-4), '.mat'];
+        et_base_filename = correct_asc_filename(1:end-4); % Remove .asc extension to get base filename
+        output_mat_filepath = [ETPATH, et_base_filename, '.mat'];
         ET = parseeyelink(full_asc_filepath, output_mat_filepath, 'Trigger');
 
 % ===========================================GEMINI PART================================================================================
@@ -132,7 +133,7 @@ if readytorun
         %pop_importeyetracker(EEG, matFileToLoad, startEndEvent, ...
         %   importColumns, newLabels, importEyeEvents, doRegression, ...
         %   filterEyetrack, plotFig)
-        EEG = pop_importeyetracker(EEG,[ETPATH, fn, '.mat'],[50 60] ,[2:3] ,{'L-GAZE-X' 'L-GAZE-Y'},0,1,0,0);
+        EEG = pop_importeyetracker(EEG,[ETPATH, et_base_filename, '.mat'],[50 60] ,[2:3] ,{'L-GAZE-X' 'L-GAZE-Y'},0,1,0,0);
 
 
         % append other trial information
